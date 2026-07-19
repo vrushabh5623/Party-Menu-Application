@@ -1,0 +1,38 @@
+.notfound-bg{
+  background-color: black;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found-head{
+  color: rgb(255, 123, 0);
+  font-size: 130px;
+  font-family: sans-serif;
+}
+.not-found-head2{
+  color: #ffffff;
+  font-size: 40px;
+  font-family: sans-serif;
+  padding-bottom: 20px;
+}
+.not-found-para{
+  font-size: 20px;
+  color: rgb(96, 96, 96);
+  font-family: sans-serif;
+  padding-bottom: 20px;
+}
+.not-found-btn{
+  background-color: rgb(227, 126, 2);
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  outline: none;
+  border: none;
+  height: 55px;
+  width: 200px;
+  border-radius: 10px;
+  cursor: pointer;
+}
