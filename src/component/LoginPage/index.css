@@ -17,6 +17,11 @@
   justify-content: center;
   align-items: center;
 }
+@media screen and (max-width:768px) {
+  .login-menu-bg{
+    width: 340px;
+  }
+}
 .form {
   display: flex;
   flex-direction: column;
@@ -58,6 +63,11 @@
   color: #ffffff;
   font-size: 18px;
 }
+@media screen and (max-width:768px){
+  .input{
+    width: 290px;
+  }
+}
 .password{
   color: #ffffff;
   font-size: 15px;
@@ -68,11 +78,16 @@
   background-color: #f28305;
   border: none;
   outline: none;
-  width: 350px;
+  width: 360px;
   height: 35px;
   border-radius: 10px;
   font-size: 15px;
   font-family: sans-serif;
+}
+@media screen and (max-width:768px) {
+  .submit-btn{
+    width: 300px;
+  }
 }
 .error-div{
   height: 70px;

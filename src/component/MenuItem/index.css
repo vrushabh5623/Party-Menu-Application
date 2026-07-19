@@ -7,6 +7,13 @@
   padding-top: 40px;
   padding-bottom: 100px;
 }
+@media screen and (max-width:768px) {
+  .save-bg-container{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
 .save-item-btn{
   color: #e1dfdf;
   font-size: 18px;
@@ -16,6 +23,12 @@
   border-radius: 5px;
   margin-left: 20px;
   outline: none;
+}
+@media screen and (max-width:768px) {
+  .save-item-btn{
+    /* padding: 8px 8px; */
+    /* font-size: 14px; */
+  }
 }
 .save-item-btn:hover{
   color: orange;
@@ -63,6 +76,12 @@
   align-items: center;
   gap: 10px;
 }
+@media screen and (max-width:768px) {
+  .save-item-btn1{
+    padding: 10px 8px;
+    /* font-size: 14px; */
+  }
+}
 .save-item-btn1:hover{
   color: orange;
   border: 1px solid orange;
@@ -85,6 +104,18 @@
   background-size: cover;
   border-radius: 15px;
   margin-right: 20px;
+}
+@media screen and (max-width:768px) {
+  .save-page-image{
+    height: 500px;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 992px){
+  .save-page-image{
+    margin-bottom: 20px;
+    width: 100%;
+  }
 }
 .save-main{
   color: #ff8000;
@@ -112,21 +143,49 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+@media screen and (max-width:768px) {
+  .save-head{
+    margin-top: 10px;
+  }
+}
 .save-head-para{
   color: #7e7e7e;
   font-size: 20px;
   font-family: sans-serif;
   padding-bottom: 10px;
 }
+@media screen and (max-width:768px){
+  .save-head-para{
+    font-size: 18px;
+  }
+}
 .image-btn-container{
   display: flex;
   flex-direction: row;
   margin-top: 40px;
 }
+@media screen and (max-width:768px) {
+  .image-btn-container{
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+@media screen and (max-width: 992px){
+  .image-btn-container{
+    display: flex;
+    flex-direction: column;
+  }
+}
 .ingred-head{
   color: #ffffff;
   font-size: 25px;
   font-family: sans-serif;
+}
+@media screen and (max-width:768px){
+  .ingred-head{
+    margin-top:10px;
+  }
 }
 .ingred-container{
   background-color: #2828286f;

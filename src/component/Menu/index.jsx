@@ -21,7 +21,7 @@ class Menu extends(Component){
     localStorage.removeItem('savedRecipes');
 
     const {history} = this.props
-    history.replace("/login")
+    history.replace("/signin")
   }
 
   onChangeSearchInput = (event) =>{
@@ -75,7 +75,7 @@ class Menu extends(Component){
 
         <div className="filter-div">
           <p className="category-para">CATEGORY</p>
-          <div>
+          <div className="filter-btn-container1">
             <button
             className={(activeCategory==="All")?"filter-btn":"all-color"}
             onClick={()=>this.onChangeCategory("All")}

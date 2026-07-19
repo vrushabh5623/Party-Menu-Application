@@ -10,6 +10,11 @@
   border-radius: 20px;
   margin-top: 10px;
 }
+@media screen and (max-width:768px) {
+  .remove-btn{
+    width: 300px;
+  }
+}
 .save-not-found{
   width: 100%;
   display: flex;
