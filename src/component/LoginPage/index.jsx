@@ -1,6 +1,7 @@
 import { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { TbToolsKitchen3 } from "react-icons/tb";
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import './index.css';
 
 
@@ -12,16 +13,14 @@ class LoginPage extends(Component){
     error:false
   }
 
-  onSubmitSuccess = (jwtToken) =>{
+  onSubmitSuccess = (jwtToken,user) =>{
     const {history} = this.props
-    Cookies.set('token',jwtToken,{
-      expires:30,
-      path:"/"
-    })
+    
+    localStorage.setItem("party_menu_token",jwtToken);
+
+    localStorage.setItem("party_menu_user",JSON.stringify(user));
+
     history.replace("/")
-    const{email,password} = this.state
-    localStorage.setItem('email',email);
-    localStorage.setItem('password',password);
 
   }
 
@@ -37,7 +36,6 @@ class LoginPage extends(Component){
     const userDetails = {
       "email" : email,
       "password":password,
-      isLoading: false
     }
 
     const url = "https://serverless-api-teal.vercel.app/api/auth/signin";
@@ -51,12 +49,12 @@ class LoginPage extends(Component){
 
     const response = await fetch(url,options);
     const data = await response.json()
-    // console.log(response)
-    // console.log(data)
     this.setState({isLoading:false})
     if(response.ok === true){
-      // console.log(data.data.token)
-      this.onSubmitSuccess(data.data.token)
+      this.onSubmitSuccess(
+        data.data.token,
+        data.data.user
+      )
     }
     else{
       console.log(data.message)
@@ -112,6 +110,11 @@ class LoginPage extends(Component){
 
   render(){
     const {error,error_msg,isLoading} = this.state
+    const token = localStorage.getItem('party_menu_token')
+    if(token){
+      return <Redirect to="/"/>
+    }
+
     return(
       <div className="login-bg-container">
         <div className="login-menu-bg">

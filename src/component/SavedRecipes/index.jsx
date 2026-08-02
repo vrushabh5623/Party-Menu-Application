@@ -7,14 +7,14 @@ class SavedRecipes extends Component {
 
   removeBtn = id => {
     const savedRecipes =
-      JSON.parse(localStorage.getItem("savedRecipes")) || [];
+      JSON.parse(localStorage.getItem("party_menu_saved_recipes")) || [];
 
     const updatedList = savedRecipes.filter(
       eachId => eachId !== id
     );
 
     localStorage.setItem(
-      "savedRecipes",
+      "party_menu_saved_recipes",
       JSON.stringify(updatedList)
     );
 
@@ -22,7 +22,7 @@ class SavedRecipes extends Component {
   };
   render() {
     const savedRecipe =
-      JSON.parse(localStorage.getItem("savedRecipes")) || [];
+      JSON.parse(localStorage.getItem("party_menu_saved_recipes")) || [];
 
     const savedItems = menuData.filter(eachItem =>
       savedRecipe.includes(eachItem.id)
@@ -48,12 +48,25 @@ class SavedRecipes extends Component {
           {savedItems.length === 0 ? (
             <div className="save-not-found">
               <p className="no-recip-met">No saved recipes yet.</p>
-              <p className="browse-recipe">Browse the menu</p>
+
+              <p className="browse-recipe">
+                <Link
+                  to="/"
+                  className="browse-recipe link"
+                >
+                  Browse the menu
+                </Link>
+              </p>
             </div>
           ) : (
+            <ul className="un-list">{
             savedItems.map(eachItem => (
-                <div key={eachItem.id}>
-                <div className="card-div">
+                <li key={eachItem.id}>
+                <div className="card-div2">
+                  <Link
+                  to={`/menu/${eachItem.id}`}
+                  className="link"
+                >
                   <div
                     className="item-image"
                     style={{
@@ -96,11 +109,13 @@ class SavedRecipes extends Component {
                     <p className="no-para">
                       {eachItem.servings}
                     </p>
-                    <button className="remove-btn" onClick={() => this.removeBtn(eachItem.id)}>Remove</button>
                   </div>
+                  </Link>
+                  <button className="remove-btn" onClick={() => this.removeBtn(eachItem.id)}>Remove</button>
                 </div>
-                </div>
+                </li>
             ))
+          }</ul>
           )}
         </div>
           )

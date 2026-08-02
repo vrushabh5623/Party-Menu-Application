@@ -28,6 +28,7 @@
   .save-item-btn{
     /* padding: 8px 8px; */
     /* font-size: 14px; */
+    padding: 10px 8px;
   }
 }
 .save-item-btn:hover{
@@ -47,6 +48,12 @@
   border-radius: 5px;
   margin-left: 20px;
   outline: none;
+}
+@media screen and (max-width:768px) {
+  .save-item-btn-true{
+    font-size: 20px;
+    padding: 10px 8px;
+  }
 }
 .save-item-btn-false{
   display: flex;

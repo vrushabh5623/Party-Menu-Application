@@ -16,7 +16,7 @@ class MenuItem extends(Component){
   const { id } = match.params;
 
   const savedRecipe =
-    JSON.parse(localStorage.getItem("savedRecipes")) || [];
+    JSON.parse(localStorage.getItem("party_menu_saved_recipes")) || [];
 
   if (savedRecipe.includes(Number(id))) {
     const updatedList = savedRecipe.filter(
@@ -24,14 +24,14 @@ class MenuItem extends(Component){
     );
 
     localStorage.setItem(
-      "savedRecipes",
+      "party_menu_saved_recipes",
       JSON.stringify(updatedList)
     );
   } else {
     savedRecipe.push(Number(id));
 
     localStorage.setItem(
-      "savedRecipes",
+      "party_menu_saved_recipes",
       JSON.stringify(savedRecipe)
     );
   }
@@ -48,7 +48,7 @@ class MenuItem extends(Component){
     );
 
     const savedRecipe =
-      JSON.parse(localStorage.getItem("savedRecipes")) || [];
+      JSON.parse(localStorage.getItem("party_menu_saved_recipes")) || [];
 
     const isSaved = savedRecipe.includes(Number(id));
     console.log(savedRecipe)
@@ -79,8 +79,8 @@ class MenuItem extends(Component){
             <img src={menuItem.image} className="save-page-image" alt="save-image"/>
             <div>
               <div>
-                <span className="save-main">Main</span>
-                <span className="save-main-veg">Veg</span>
+                <span className="save-main">{menuItem.category.toUpperCase()}</span>
+                <span className="save-main-veg">{menuItem.isVeg?"Veg":"Non-Veg"}</span>
               </div>
               <h1 className="save-head">{menuItem.name}</h1>
               <p className="save-head-para">{menuItem.servings}</p>
@@ -90,30 +90,24 @@ class MenuItem extends(Component){
 
           <div className="ingred-container">
             <h1 className="ingred-head">Ingredients</h1>
-            <div className="urad-div">
-              <p className="urad-para">{menuItem.ingredients[0].name}</p>
-              <p className="urad-quantity">{menuItem.ingredients[0].quantity}</p>
-            </div>
+            <ul>
+            {
+              menuItem.ingredients.map(eachIngredient => (
+                <li
+                  className="urad-div"
+                  key={eachIngredient.name}
+                >
+                  <p className="urad-para">
+                    {eachIngredient.name}
+                  </p>
 
-            <div className="urad-div">
-              <p className="urad-para">{menuItem.ingredients[1].name}</p>
-              <p className="urad-quantity">{menuItem.ingredients[1].quantity}</p>
-            </div>
-
-            <div className="urad-div">
-              <p className="urad-para">{menuItem.ingredients[2].name}</p>
-              <p className="urad-quantity">{menuItem.ingredients[2].quantity}</p>
-            </div>
-
-            <div className="urad-div">
-              <p className="urad-para">{menuItem.ingredients[3].name}</p>
-              <p className="urad-quantity">{menuItem.ingredients[3].quantity}</p>
-            </div>
-
-            <div className="urad-div">
-              <p className="urad-para">{menuItem.ingredients[4].name}</p>
-              <p className="urad-quantity">{menuItem.ingredients[4].quantity}</p>
-            </div>
+                  <p className="urad-quantity">
+                    {eachIngredient.quantity}
+                  </p>
+                </li>
+              ))
+            }
+            </ul>
           </div>
       </div>
     )

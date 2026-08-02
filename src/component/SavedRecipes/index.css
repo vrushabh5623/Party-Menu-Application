@@ -9,10 +9,12 @@
   width: 330px;
   border-radius: 20px;
   margin-top: 10px;
+  margin-left:20px
 }
 @media screen and (max-width:768px) {
   .remove-btn{
     width: 300px;
+    margin-left: 20px;
   }
 }
 .save-not-found{
@@ -35,4 +37,29 @@
   font-size: 15px;
   font-weight: bold;
   margin-top: 20px;
+}
+.card-div2{
+  background-color: #1c1c1c;
+  width: 370px;
+  height: 410px;
+  height: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border: 1px solid #424242;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-bottom: 20px;
+}
+@media screen and (max-width:768px) {
+  .card-div2{
+    width: 340px;
+  }
+}
+.card-div2:hover{
+  border: 1px solid orange;
+}
+
+.un-list{
+  list-style-type: none;
+  padding-left: 0px;
 }

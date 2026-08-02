@@ -1,5 +1,6 @@
 .menu-bg-container{
   background-color: rgb(5, 5, 5);
+  /* background-color: #ffffff; */
   min-height: 100vh;
   background-size: cover;
   padding-left: 170px;
@@ -71,8 +72,10 @@
   background-color: rgb(255, 136, 0);
   padding: 8px 20px;
   color: #d0cece;
+  gap:10px;
+  /* margin-top:10px; */
   margin-right: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   border-radius: 20px;
  
 }
@@ -92,6 +95,8 @@
   color: #d0cece;
   margin-right: 10px;
   border-radius: 20px;
+  margin-bottom:10px;
+  gap:10px;
 }
 .category-para{
   color: #8d8b8b;

@@ -1,9 +1,8 @@
 import { Redirect,Route } from "react-router-dom";
-import Cookies from 'js-cookie'
 
 const ProtectedRoute = props =>{
-  const token = Cookies.get('token')
-  if(token === undefined){
+  const token = localStorage.getItem('party_menu_token')
+  if(!token){
     return <Redirect to='/signin'/>
   }
   return <Route {...props}/>

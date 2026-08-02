@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import { FaLeaf } from "react-icons/fa";
 import { IoRadioButtonOnSharp } from "react-icons/io5";
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import menuData from "../../data/menuData";
 import './index.css'
 
@@ -11,14 +11,14 @@ class Menu extends(Component){
     menuList: menuData,
     activeCategory:"All",
     food:"All",
-    searchInput:""
+    searchInput:"",
+    searchText:"",
   }
 
   onClickLogout = () =>{
-    Cookies.remove("token")
-    localStorage.removeItem('eamil');
-    localStorage.removeItem('password');
-    localStorage.removeItem('savedRecipes');
+    // Cookies.remove("party_menu_token")
+    localStorage.removeItem('party_menu_token');
+    localStorage.removeItem("party_menu_user");
 
     const {history} = this.props
     history.replace("/signin")
@@ -36,8 +36,12 @@ class Menu extends(Component){
     this.setState({food:foodtype})
   }
 
+  onClickSearch = () =>{
+    this.setState({searchText:this.state.searchInput})
+  }
+
   render(){
-    const {menuList, activeCategory,food,searchInput} = this.state
+    const {menuList, activeCategory,food,searchInput,searchText} = this.state
     // console.log(menuList)
     const categoryList = activeCategory === "All" ?
      menuList:(
@@ -48,11 +52,12 @@ class Menu extends(Component){
       eachItem=>food === "Veg" ? eachItem.isVeg:!eachItem.isVeg
     )
 
-    const searchList = filterList.filter(eachItem =>eachItem.name.toLowerCase().includes(searchInput.toLowerCase()));
+    const searchList = filterList.filter(eachItem =>eachItem.name.toLowerCase().includes(searchText.toLowerCase()));
 
     const savedRecipe =
-    JSON.parse(localStorage.getItem("savedRecipes")) || [];
-    const username = localStorage.getItem("username");
+    JSON.parse(localStorage.getItem("party_menu_saved_recipes")) || [];
+    const user = JSON.parse(localStorage.getItem("party_menu_user"));
+    const username = user ? user.name : "";
 
     const savedCount = savedRecipe.length;
     return(
@@ -85,6 +90,10 @@ class Menu extends(Component){
             onClick={()=>this.onChangeCategory("starter")}
             >Starter</button>
             <button
+            className={(activeCategory==="main")?"filter-btn":"all-color"}
+            onClick={()=>this.onChangeCategory("main")}
+            >Main</button>
+            <button
             className={(activeCategory==="sides")?"filter-btn":"all-color"}
             onClick={()=>this.onChangeCategory("sides")}
             >Sides</button>
@@ -114,13 +123,15 @@ class Menu extends(Component){
               <input
                 className='search-input'
                 type="search"
-                className="search-input"
                 placeholder="Search by name (e.g.chicken)"
                 value={searchInput}
                 onChange={this.onChangeSearchInput}
               />
 
-              <button className="search-btn">
+              <button className="search-btn"
+                type="button"
+                onClick={this.onClickSearch}
+              >
                 Search
               </button>
             </div>
@@ -130,39 +141,39 @@ class Menu extends(Component){
         {/* Items Section */}
         <p className="count-para">{searchList.length} Items found</p>
         {
-          (filterList.length>0)?(
-            <div className="flex-card-div">
-        {
-          searchList.map(eachItem=>{
-            return(
-              <Link to={`/menu/${eachItem.id}`} key={eachItem.id} className='link'>
-                <div className="card-div" >
-                  <div>
-                    <div className="item-image"
-                    style={{backgroundImage:`url(${eachItem.image})`
-                    }}
-                    >{
-                      eachItem.isVeg ? (
-                        <p className="non-para"><span style={{backgroundColor:"green"}} className="non-veg-tag">VEG</span></p>
-                      ):
-                      (
-                        <p className="non-para"><span style={{backgroundColor:"red"}} className="non-veg-tag">NON-VEG</span></p>
-                      )
-                    }
-                    </div>
-                    <div className="main-head-div">
-                      <p className="main-head">{eachItem.category}</p>
-                      <h1 className="main-para-head">{eachItem.name}</h1>
-                      <p className="main-para">{eachItem.description}</p>
-                      <p className="no-para">{eachItem.servings}</p>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            )
-          })
-        }
-        </div>
+          (searchList.length>0)?(
+            <ul className="flex-card-div un-list">
+            {
+              searchList.map(eachItem=>{
+                return(
+                  <Link to={`/menu/${eachItem.id}`} key={eachItem.id} className='link'>
+                    <li className="card-div" >
+                      <div>
+                        <div className="item-image"
+                        style={{backgroundImage:`url(${eachItem.image})`
+                        }}
+                        >{
+                          eachItem.isVeg ? (
+                            <p className="non-para"><span style={{backgroundColor:"green"}} className="non-veg-tag">VEG</span></p>
+                          ):
+                          (
+                            <p className="non-para"><span style={{backgroundColor:"red"}} className="non-veg-tag">NON-VEG</span></p>
+                          )
+                        }
+                        </div>
+                        <div className="main-head-div">
+                          <p className="main-head">{eachItem.category}</p>
+                          <h1 className="main-para-head">{eachItem.name}</h1>
+                          <p className="main-para">{eachItem.description}</p>
+                          <p className="no-para">{eachItem.servings}</p>
+                        </div>
+                      </div>
+                    </li>
+                  </Link>
+                )
+              })
+            }
+            </ul>
           ):(
             <div>
               <p className="not-found-color">No dishes found. Try different filters.</p>

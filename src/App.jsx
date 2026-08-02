@@ -15,8 +15,8 @@ const App = () => (
     <Switch>
       <Route exact path="/signin" component={LoginPage} />
       <ProtectedRoute exact path="/" component={Menu} />
-      <ProtectedRoute exact path="/menu/:id" component={MenuItem} />
-      <ProtectedRoute exact path="/saved-recipes" component={SavedRecipes} />
+      <Route exact path="/menu/:id" component={MenuItem} />
+      <Route exact path="/saved-recipes" component={SavedRecipes} />
 
       <Route exact path="/NotFound" component={NotFound} />
       <Redirect to="/NotFound"/>
